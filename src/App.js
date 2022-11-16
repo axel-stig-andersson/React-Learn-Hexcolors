@@ -6,6 +6,7 @@ function App() {
 
   const [color, setColor] = useState('')
   const [buttonColors, setButtonColors] = useState ([]);
+  const [correct, setCorrect] = useState(false)
 
 
   useEffect(() => {
@@ -30,6 +31,15 @@ function App() {
    let shuffledList = list.sort((a,b) => 0.5 - Math.random())
    return shuffledList
   }
+  const handleAnswerClick = (answer) => {
+    if (answer === color) {
+      setCorrect(true)
+      console.log("Correct!")
+    } else {
+      setCorrect(false)
+      console.log("WRONG")
+    }
+  }
 
   return (
     <div className="App">
@@ -37,7 +47,7 @@ function App() {
 
       <ColorBox color={color} />
       {buttonColors.map(col => (
-        <Button key={col} text={col} />
+        <Button key={col} text={col} onClick={() => handleAnswerClick(col)} /> 
       ))} 
       </column>
     </div>
